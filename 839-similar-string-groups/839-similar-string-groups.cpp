@@ -29,8 +29,10 @@ public:
         for(int i = 0 ; i < n ; i++){
             if(a[i] != b[i])
                 cnt++;
+            if(cnt > 2)
+                return false;
         }
-        return (cnt<=2);
+        return true;
     }
     
     int numSimilarGroups(vector<string>& strs) {
