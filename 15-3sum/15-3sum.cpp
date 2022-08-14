@@ -5,7 +5,7 @@ public:
         int n = nums.size();
         sort(nums.begin(),nums.end());
         for(int i = 0 ; i < n ; i++){
-            while(i < n && i > 0 && nums[i] == nums[i-1]){
+            while(i && i < n && nums[i] == nums[i-1]){
                 ++i;
             }
             int s = i+1;
@@ -22,7 +22,7 @@ public:
                     while(e > i && nums[e] == v){
                         e--;
                     }
-                    while(s <= e && nums[s] == u){
+                    while(s < e && nums[s] == u){
                         s++;
                     }
                 }
