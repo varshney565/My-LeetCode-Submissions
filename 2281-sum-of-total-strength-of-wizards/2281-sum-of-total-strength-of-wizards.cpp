@@ -2,10 +2,10 @@ class Solution {
 public:
     int totalStrength(vector<int>& strength) {
         int n = strength.size();
-        vector<long long> next(n,n);
-        vector<long long> prev(n,-1);
+        vector<int> next(n,n);
+        vector<int> prev(n,-1);
         auto nextSmaller = [&](){
-            stack<long long> s;
+            stack<int> s;
             for(int i = n-1 ; i >= 0 ; i--){
                 while(!s.empty() && strength[s.top()] >= strength[i]){
                     s.pop();
@@ -16,7 +16,7 @@ public:
         };
         
         auto prevSmaller = [&](){
-            stack<long long> s;
+            stack<int> s;
             for(int i = 0 ; i < n ; i++){
                 while(!s.empty() && strength[s.top()] > strength[i]){
                     s.pop();
@@ -60,10 +60,10 @@ public:
         
         long long ans = 0;
         for(int i = 0 ; i < n ; i++){
-            long long L = prev[i];
-            long long R = next[i];
-            long long Lsize = i-L;
-            long long Rsize = R-i;
+            int L = prev[i];
+            int R = next[i];
+            int Lsize = i-L;
+            int Rsize = R-i;
             long long LeftSum = pre[i];
             if(L >= 0)
                 LeftSum -= pre[L];
