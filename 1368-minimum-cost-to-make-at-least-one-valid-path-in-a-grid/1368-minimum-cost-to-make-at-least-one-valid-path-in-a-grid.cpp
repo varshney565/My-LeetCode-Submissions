@@ -1,9 +1,5 @@
 class Solution {
 public:
-    //1 right
-    //2 left
-    //3 lower
-    //4 up
     int minCost(vector<vector<int>>& grid) {
         int n = grid.size();
         int m = grid[0].size();
@@ -25,6 +21,8 @@ public:
                 int newX = x+dir[i-1][0];
                 int newY = y+dir[i-1][1];
                 if(newX >= 0 && newX < n && newY >= 0 && newY < m){
+                    if(Cost[newX][newY] != INT_MAX)
+                        continue;
                     if(grid[x][y] == i){
                         PendingCells.insert({cost,newX*m+newY});
                     }else{
