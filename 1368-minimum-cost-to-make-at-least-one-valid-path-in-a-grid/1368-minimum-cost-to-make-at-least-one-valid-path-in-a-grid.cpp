@@ -8,12 +8,12 @@ public:
         int n = grid.size();
         int m = grid[0].size();
         vector<vector<int>> Cost(n,vector<int>(m,INT_MAX));
-        queue<pair<int,int>> PendingCells;
-        PendingCells.push({0,0});
+        set<pair<int,int>> PendingCells;
+        PendingCells.insert({0,0});
         int dir[4][2] = {{0,1},{0,-1},{1,0},{-1,0}};
         while(!PendingCells.empty()){
-            pair<int,int> front = PendingCells.front();
-            PendingCells.pop();
+            pair<int,int> front = *PendingCells.begin();
+            PendingCells.erase(front);
             int cost = front.first;
             int x = front.second/m;
             int y = front.second%m;
@@ -26,9 +26,9 @@ public:
                 int newY = y+dir[i-1][1];
                 if(newX >= 0 && newX < n && newY >= 0 && newY < m){
                     if(grid[x][y] == i){
-                        PendingCells.push({cost,newX*m+newY});
+                        PendingCells.insert({cost,newX*m+newY});
                     }else{
-                        PendingCells.push({cost+1,newX*m+newY});
+                        PendingCells.insert({cost+1,newX*m+newY});
                     }
                 }
             }
