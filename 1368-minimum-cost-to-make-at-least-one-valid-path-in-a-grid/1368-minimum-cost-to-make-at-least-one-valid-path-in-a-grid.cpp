@@ -13,6 +13,7 @@ public:
             int cost = front.first;
             int x = front.second/m;
             int y = front.second%m;
+            if(x == n-1 && y == m-1) return cost;
             if(Cost[x][y] <= cost){
                 continue;
             }
@@ -21,8 +22,6 @@ public:
                 int newX = x+dir[i-1][0];
                 int newY = y+dir[i-1][1];
                 if(newX >= 0 && newX < n && newY >= 0 && newY < m){
-                    if(Cost[newX][newY] != INT_MAX)
-                        continue;
                     if(grid[x][y] == i){
                         PendingCells.insert({cost,newX*m+newY});
                     }else{
