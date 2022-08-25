@@ -21,25 +21,29 @@ class dsu{
 };
 
 
+
 class Solution {
 public:
     string smallestStringWithSwaps(string s, vector<vector<int>>& pairs) {
-        int n = s.size();
+        int n = s.length();
         dsu D(n);
-        for(int i = 0 ; i < pairs.size() ; i++){
-            D.unite(pairs[i][0],pairs[i][1]);
+        for(auto x : pairs){
+            D.unite(x[0],x[1]);
         }
-        map<int,multiset<int>> F;
-        for(int i = 0 ; i < n ; i++){
-            int p = D.get(i);
-            F[p].insert(s[i]);
+        
+        vector<vector<int>> child(n);
+        for (int i = 0; i < n; i++){
+            child[D.get(i)].push_back(i);
         }
-        string ans = "";
-        for(int i = 0 ; i < n ; i++){
-            int p = D.get(i);
-            ans += *(F[p].begin());
-            F[p].erase(F[p].begin());
+        
+        for (auto &p : child) {
+            string temp = "";
+            for (int i : p) temp += s[i];
+            sort(temp.begin(), temp.end());
+            int k = 0;
+            for (int i : p)
+                s[i] = temp[k++];
         }
-        return ans;
+        return s;
     }
 };
