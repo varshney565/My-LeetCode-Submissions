@@ -10,13 +10,9 @@ public:
             if(dp[n][m] != -1) return dp[n][m];
             int ans = 0;
             if(s[n-1] == t[m-1]){
-                //take it
                 ans += go(n-1,m-1);
-                //ignore it
-                ans += go(n-1,m);
-            }else{
-                ans += go(n-1,m);
             }
+            ans += go(n-1,m);
             return dp[n][m] = ans;
         };
         return go(s.size(),t.size());
