@@ -10,10 +10,11 @@ public:
                 return 1;
             if(dp[i][j] != -1)
                 return dp[i][j];
-            int SmallAns1 = go(i+1,j);
-            int SmallAns2 = go(i,j-1);
-            int SmallAns3 = go(i+1,j-1)+((s[i] == s[j])?2:0);
-            return dp[i][j] = max(max(SmallAns1,SmallAns2),SmallAns3);
+            if(s[i] == s[j]){
+                return dp[i][j] = 2+go(i+1,j-1);
+            }else{
+                return dp[i][j] = max(go(i+1,j),go(i,j-1));
+            }
         };
         return go(0,n-1);
     }
