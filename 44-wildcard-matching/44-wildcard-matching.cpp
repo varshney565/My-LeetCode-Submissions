@@ -22,16 +22,7 @@ public:
             }else if(p[m-1] == '?'){
                 return dp[n][m] = go(n-1,m-1);
             }else if(p[m-1] == '*'){
-                int ok1 = go(n-1,m);
-                if(!ok1){
-                    int ok2 = go(n-1,m-1);
-                    if(!ok2){
-                        return dp[n][m] = go(n,m-1);
-                    }
-                    return dp[n][m] = ok2;
-                }else{
-                    return dp[n][m] = ok1;
-                }
+                return dp[n][m] = go(n-1,m)  || go(n-1,m-1) || go(n,m-1);
             }else{
                 return dp[n][m] = 0;
             }
