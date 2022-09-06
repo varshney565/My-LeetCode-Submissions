@@ -15,9 +15,9 @@ public:
                     st = i;
                     en = j;
                 }else if(gap == 2){
-                    dp[i][j] = (s[i] == s[j] && (1,st = i,en = j));
+                    dp[i][j] = (s[i] == s[j] && (st = i,en = j));
                 }else{                    
-                    dp[i][j] = (dp[i+1][j-1] && s[i] == s[j] && (1,st = i,en = j));
+                    dp[i][j] = (dp[i+1][j-1] && s[i] == s[j] && (st = i,en = j));
                 }
                 i++;
                 j++;
