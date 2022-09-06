@@ -13,10 +13,7 @@ public:
             if(nums1[n-1] == nums2[m-1]){
                 return dp[n][m] = 1+go(n-1,m-1);
             }else{
-                int ans = 0;
-                ans = max(ans,go(n-1,m));
-                ans = max(ans,go(n,m-1));
-                return dp[n][m] = ans;
+                return dp[n][m] = max(go(n-1,m),go(n,m-1));
             }
         };
         return go(n,m);
