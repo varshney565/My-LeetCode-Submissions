@@ -7,9 +7,9 @@ public:
         function<int(int,int)> go = [&](int n,int m){
             //Base Case...
             if(n == 0 || m == 0)
-                return dp[n][m] = 0;
+                return dp[n][m] = -(int)1e9;
             if(dp[n][m] != -1) return dp[n][m];
-            int res = INT_MIN;
+            int res = nums1[n-1]*nums2[m-1];
             //take both n-1 and m-1 character
             res = max(res,nums1[n-1]*nums2[m-1]+go(n-1,m-1));
             //take n-1 char and ignore m-1
@@ -21,15 +21,6 @@ public:
             //no need to call for this test case
             return dp[n][m] = res;
         };
-        int ans = go(n,m);
-        if(nums1[0] < 0){
-            sort(nums1.begin(),nums1.end(),greater<int>());
-            sort(nums2.begin(),nums2.end());
-        }else{
-            sort(nums1.begin(),nums1.end());
-            sort(nums2.begin(),nums2.end(),greater<int>());
-        }
-        int val = nums1[0]*nums2[0];
-        return ((ans==0)?val:ans);
+        return go(n,m);
     }
 };
