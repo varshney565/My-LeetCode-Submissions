@@ -11,9 +11,7 @@ public:
             int j = i+gap-1;
             while(j < n){
                 if(gap == 1){
-                    dp[i][j] = true;
-                    st = i;
-                    en = j;
+                    dp[i][j] = true,st = i,en = j;
                 }else if(gap == 2){
                     dp[i][j] = (s[i] == s[j] && (st = i,en = j));
                 }else{                    
