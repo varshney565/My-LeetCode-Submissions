@@ -7,19 +7,19 @@ public:
             Map.insert(x);
         }
         vector<int> dp(n+1,-1);
-        function<int(int)> go = [&](int n){
-            if(dp[n] != -1) return dp[n];
-            if(n == 0) return dp[n] = 1;
+        function<int(int)> go = [&](int start){
+            if(start == n) return dp[start] = 1;
+            if(dp[start] != -1) return dp[start];
             string tmp = "";
-            for(int i = n - 1 ; i >= 0 ; i--){
-                tmp = s[i] + tmp;
+            for(int i = start ; i < n ; i++){
+                tmp += s[i];
                 if(Map.find(tmp) != Map.end()){
-                    auto result = go(i);
-                    if(result) return dp[n] = result;
+                    auto result = go(i+1);
+                    if(result) return dp[start] = result;
                 }
             }
-            return dp[n] = 0;
+            return dp[start] = 0;
         };
-        return go(n);
+        return go(0);
     }
 };
