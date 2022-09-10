@@ -1,25 +1,29 @@
+int max(int a,int b){
+    return a>b?a:b;
+}
 class Solution {
 public:
     bool wordBreak(string s, vector<string>& wordDict) {
         int n = s.size();
-        set<string> Map;
+        set<string> Words;
+        int l = 0;
         for(auto x : wordDict){
-            Map.insert(x);
+            Words.insert(x);
+            l = max(l,x.size());
         }
-        vector<int> dp(n+1,-1);
-        function<int(int)> go = [&](int start){
-            if(start == n) return dp[start] = 1;
-            if(dp[start] != -1) return dp[start];
+        
+        vector<bool> dp(n+1,false);
+        dp[0] = true;
+        for(int i = 0 ; i <= n ; i++){
+            if(!dp[i]) continue;
             string tmp = "";
-            for(int i = start ; i < n ; i++){
-                tmp += s[i];
-                if(Map.find(tmp) != Map.end()){
-                    auto result = go(i+1);
-                    if(result) return dp[start] = result;
+            for(int j = i + 1 ; j <= n && j <= i + l ; j++){
+                tmp += s[j-1];
+                if(Words.find(tmp) != Words.end()){
+                    dp[j] = true;
                 }
             }
-            return dp[start] = 0;
-        };
-        return go(0);
+        }
+        return dp[n];
     }
 };
