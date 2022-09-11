@@ -3,7 +3,7 @@ public:
     int minSumOfLengths(vector<int>& arr, int target) {
         int n = arr.size();
         vector<int> pre(n,n),suf(n,n);
-        map<int,int> F;
+        unordered_map<int,int> F;
         int sum = 0;
         for(int i = 0 ; i < n ; i++){
             sum += arr[i];
