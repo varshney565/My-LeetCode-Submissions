@@ -3,14 +3,13 @@ public:
     int minSumOfLengths(vector<int>& arr, int target) {
         int n = arr.size();
         vector<int> pre(n,n),suf(n,n);
-        unordered_map<int,int> F;
+        map<int,int> F;
         int sum = 0;
         for(int i = 0 ; i < n ; i++){
             sum += arr[i];
             if(sum == target){
                 pre[i] = i + 1;
-            }
-            if(F.find(sum-target) != F.end()){
+            }else if(F.find(sum-target) != F.end()){
                 pre[i] = i - F[sum-target];
             }
             F[sum] = i;
@@ -21,8 +20,7 @@ public:
             sum += arr[i];
             if(sum == target){
                 suf[i] = n - i;
-            }
-            if(F.find(sum - target) != F.end()){
+            }else if(F.find(sum - target) != F.end()){
                 suf[i] = F[sum - target] - i;
             }
             F[sum] = i;
