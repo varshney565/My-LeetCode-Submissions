@@ -14,7 +14,7 @@ public:
             int ei = LIS.size()-1;
             while(si <= ei){
                 int mid = (si+ei)/2;
-                if(LIS[mid][0] < v[i][0] && LIS[mid][1] < v[i][1]){
+                if(LIS[mid][0] < v[i][0]){
                     si = mid+1;
                 }else{
                     ei = mid-1;
