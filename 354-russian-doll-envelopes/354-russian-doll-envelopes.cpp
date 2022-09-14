@@ -8,23 +8,13 @@ public:
             return a[0] > b[0];
         });
 
-        vector<vector<int>> LIS;
+        vector<int> LIS;
         for(int i = 0 ; i < n ; i++){
-            int si = 0;
-            int ei = LIS.size()-1;
-            while(si <= ei){
-                int mid = (si+ei)/2;
-                if(LIS[mid][0] < v[i][0]){
-                    si = mid+1;
-                }else{
-                    ei = mid-1;
-                }
-            }
-            if(si == LIS.size()){
-                LIS.push_back(v[i]);
-            }else{
-                LIS[si] = v[i];
-            }
+            auto it = lower_bound(LIS.begin(),LIS.end(),v[i][0]);
+            if(it == LIS.end())
+                LIS.push_back(v[i][0]);
+            else
+                LIS[it-LIS.begin()] = v[i][0];
         }
         return LIS.size();
     }
