@@ -11,23 +11,24 @@ public:
         }
         
         int count = 0;
-        int i = 0;
+        int en = 0;
         int st = 0;
         int len = 1e9;
         int sp = -1;
-        while(i <= s.size()){
-            if(i < s.size() && count < t.size()){
-                s2[s[i]]++;
-                if(s2[s[i]] <= s1[s[i]] && s1[s[i]]){
+        while(en < s.size()){
+            if(count < t.size()){
+                s2[s[en]]++;
+                if(s2[s[en]] <= s1[s[en]]){
                     count++;
                 }
-                i++;
-            }else if(count == t.size()){
+                en++;
+            }
+            while(count == t.size()){
                 //count is equal to t.size()
                 //means all the characters of t are present in s.
                 //st-------i-1
-                if(len > i-st){
-                    len = i-st;
+                if(len > en-st){
+                    len = en-st;
                     sp = st;
                 }
                 s2[s[st]]--;
@@ -35,8 +36,6 @@ public:
                     count--;
                 }
                 st++;
-            }else{
-                break;
             }
         }
         if(len == 1e9) return "";
