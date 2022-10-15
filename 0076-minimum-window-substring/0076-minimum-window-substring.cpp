@@ -15,7 +15,6 @@ public:
         int st = 0;
         int len = 1e9;
         int sp = -1;
-        int ep = -1;
         while(i <= s.size()){
             if(i < s.size() && count < t.size()){
                 s2[s[i]]++;
@@ -30,7 +29,6 @@ public:
                 if(len > i-st){
                     len = i-st;
                     sp = st;
-                    ep = i-1;
                 }
                 s2[s[st]]--;
                 if(s2[s[st]] < s1[s[st]]){
