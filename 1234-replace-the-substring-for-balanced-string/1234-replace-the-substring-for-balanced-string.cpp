@@ -1,3 +1,12 @@
+/**
+Similar Questions : 
+
+1 : Leetcode 76
+2 : https://practice.geeksforgeeks.org/problems/smallest-distant-window3132/1
+*/
+
+
+
 class Solution {
 public:
     int balancedString(string s) {
