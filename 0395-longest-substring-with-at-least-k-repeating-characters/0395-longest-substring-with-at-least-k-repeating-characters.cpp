@@ -1,5 +1,9 @@
 class Solution {
 public:
+    //if i have included any element which is coming less than k times 
+    //i won't be able to find my answer as there is no dropping condition
+    //so for that i am making sure that count of unique elements in the substring is
+    //equal to some constant number and that constent  is varing from 1 to 26.
     int longestSubstring(string s, int k) {
         int n = s.size();
         int ans = 0;
