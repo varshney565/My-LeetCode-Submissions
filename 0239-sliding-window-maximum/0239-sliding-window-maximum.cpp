@@ -9,7 +9,7 @@ public:
             if(d.size() == 0){
                 d.push_back(i);
             }else{
-                while(d.size() > 0 && nums[d.back()] < nums[i]){
+                while(d.size() > 0 && nums[d.back()] <= nums[i]){
                     d.pop_back();
                 }
                 d.push_back(i);
@@ -26,7 +26,7 @@ public:
             if(d.size() == 0){
                 d.push_back(i);
             }else{
-                while(d.size() > 0 && nums[d.back()] < nums[i]){
+                while(d.size() > 0 && nums[d.back()] <= nums[i]){
                     d.pop_back();
                 }
                 d.push_back(i);
