@@ -14,7 +14,7 @@ class Solution{
             if(!arr[i])
                 arr[i] = -1;
         }
-        //now the task is to find the maximum length with sum 0;
+        //now the task is to find the total number of subarrays with sum equals to 0;
         map<int,int> cnt;
         int ans = 0;
         int sum = 0;
