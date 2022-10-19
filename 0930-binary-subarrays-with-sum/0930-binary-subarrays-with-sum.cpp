@@ -1,23 +1,24 @@
 class Solution {
 public:
-    int numSubarraysWithSum(vector<int>& nums, int goal) {
+    int numSubarraysWithSum(vector<int>& nums, int k) {
         int n = nums.size();
-        //map to store the prefix sum frequency.
-        map<int,int> cnt;
-        int en = 0;
-        int sum = 0;
-        int ans = 0;
-        while(en < n){
-            sum += nums[en];
-            if(sum == goal)
-                ans++;
-            //first check then update.
-            if(cnt.find(sum-goal) != cnt.end()){
-                ans += cnt[sum-goal];
+        //sum (k) = sum (atmost k) - sum (atmost k-1);
+        auto atmost = [&](int k){
+            int st = 0;
+            int en = 0;
+            int ans = 0;
+            int sum = 0;
+            while(en < n){
+                sum += nums[en];
+                while(st <= en && sum > k){
+                    sum -= nums[st];
+                    st++;
+                }
+                ans += (en-st+1);
+                en++;
             }
-            cnt[sum]++;
-            en++;
-        }
-        return ans;
+            return ans;
+        };
+        return atmost(k)-atmost(k-1);
     }
 };
