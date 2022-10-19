@@ -7,7 +7,7 @@ public:
                 nums[i] = -1;
         }
         //now the task is to find the maximum length subarray with sum equals to 0
-        map<int,int> cnt;
+        unordered_map<int,int> cnt;
         int sum = 0;
         int ans = 0;
         for(int i = 0 ; i < n ; i++){
