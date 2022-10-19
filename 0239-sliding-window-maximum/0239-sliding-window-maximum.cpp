@@ -1,6 +1,35 @@
 class Solution {
 public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        // using map
+        int n = nums.size();
+        // preprocess the elements
+        set<int> Window;
+        for(int i = 0 ; i < k ; i++){
+            while(!Window.empty() && nums[*Window.rbegin()] <= nums[i]){
+                Window.erase(*Window.rbegin());
+            }
+            Window.insert(i);
+        }
+        vector<int> ans;
+        ans.push_back(nums[*Window.begin()]);
+        for(int i = k ; i < n ; i++){
+            //shrink the window.
+            while(!Window.empty() && *Window.begin() <= i-k){
+                Window.erase(Window.begin());
+            }
+            
+            //insert the ith element in the window.
+            while(!Window.empty() && nums[*Window.rbegin()] <= nums[i]){
+                Window.erase(*Window.rbegin());
+            }
+            Window.insert(i);
+            ans.push_back(nums[*Window.begin()]);
+        }
+        return ans;
+        
+        
+        
         /**
         deque<int> d;
         vector<int> ans;
@@ -36,33 +65,5 @@ public:
         }
         return ans;
         **/
-        
-        
-        // using map
-        int n = nums.size();
-        // preprocess the elements
-        set<int> Window;
-        for(int i = 0 ; i < k ; i++){
-            while(!Window.empty() && nums[*Window.rbegin()] <= nums[i]){
-                Window.erase(*Window.rbegin());
-            }
-            Window.insert(i);
-        }
-        vector<int> ans;
-        ans.push_back(nums[*Window.begin()]);
-        for(int i = k ; i < n ; i++){
-            //shrink the window.
-            while(!Window.empty() && *Window.begin() <= i-k){
-                Window.erase(Window.begin());
-            }
-            
-            //insert the ith element in the window.
-            while(!Window.empty() && nums[*Window.rbegin()] <= nums[i]){
-                Window.erase(*Window.rbegin());
-            }
-            Window.insert(i);
-            ans.push_back(nums[*Window.begin()]);
-        }
-        return ans;
     }
 };
