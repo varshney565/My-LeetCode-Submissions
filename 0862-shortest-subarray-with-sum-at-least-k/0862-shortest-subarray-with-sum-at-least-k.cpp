@@ -1,3 +1,14 @@
+/**
+* also try Longest subarray with sum atmost k(neagitive elements are there).
+* 
+*
+* Hint1 : when we get a subarray with sum greater than k what to do ??
+*
+* Hint2 : keep it simple(It's like a medium level problem).
+* */
+
+
+
 class Solution {
 public:
     int shortestSubarray(vector<int>& A, int k) {
