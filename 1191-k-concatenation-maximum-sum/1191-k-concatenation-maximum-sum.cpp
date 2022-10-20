@@ -21,7 +21,7 @@ public:
         int gMax = 0;
         int cMaxSum = 0;
         int maxSuf = gsum;
-        int maxPre = int(-1e9);
+        int maxPre = 0;
         for(int i = 0 ; i < n ; i++){
             sum += arr[i];
             maxSuf = max(maxSuf,gsum-sum);
