@@ -31,9 +31,7 @@ public:
         }
         
         if(k == 1) return gMax;
-        long long value1 = gMax;
-        long long value2 = max(0ll,(long long)(k-2)*sum)+maxSuf+maxPre;
-        long long ans = max(value1,value2);
-        return ans%mod;
+        long long ans = (max(max(0ll,(long long)(k-2)*sum)+maxSuf+maxPre,gMax))%mod;
+        return ans;
     }
 };
