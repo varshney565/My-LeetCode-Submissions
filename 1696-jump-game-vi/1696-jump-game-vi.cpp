@@ -1,6 +1,11 @@
 class Solution {
 public:
     int maxResult(vector<int>& nums, int k) {
+        
+        /**
+            It will work for minJump = 1;
+            and              maxJump = k
+        */
         // int n = nums.size();
         // deque<pair<int,int>> d;
         // int i = 0;
@@ -18,7 +23,10 @@ public:
         // }
         // return d.back().second;
         
-        
+        /**
+            It will work for minJump = k1
+            and              maxJump = k2;
+        */
         int minJump = 1;
         int maxJump = k;
         int n = nums.size();
@@ -38,7 +46,7 @@ public:
             while(!d.empty() && d.front().first < i-maxJump)
                 d.pop_front();
             //Actutal processing 
-            int max_ = (d.empty()?0:d.front().second)+nums[i];
+            int max_ = d.front().second+nums[i];
             processedElements.insert({i,max_});
             i++;
         }
