@@ -3,17 +3,17 @@ public:
     int maxResult(vector<int>& nums, int k) {
         int n = nums.size();
         deque<pair<int,int>> d;
-        int i = 1;
-        d.push_back({0,nums[0]});
+        int i = 0;
         while(i < n){
-            int max_ = d.front().second;
-            if(d.front().first<=i-k)
+            //erase all the elements that needed to be deleted.
+            while(!d.empty() && d.front().first < i-k)
                 d.pop_front();
-            //insert the ith value.
-            while(!d.empty() && d.back().second <= nums[i]+max_){
+            //do the processing.
+            int max_ = (d.empty()?0:d.front().second)+nums[i];
+            //insert all the needed elements.
+            while(!d.empty() && d.back().second < max_)
                 d.pop_back();
-            }
-            d.push_back({i,nums[i]+max_});
+            d.push_back({i,max_});
             i++;
         }
         return d.back().second;
