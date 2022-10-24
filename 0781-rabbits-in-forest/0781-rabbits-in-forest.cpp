@@ -4,9 +4,8 @@ public:
         int n = answers.size();
         int ans = 0;
         map<int,int> cnt;
-        for(int i = 0 ; i < n ; i++){
-            cnt[answers[i]]++;
-        }
+        for(auto &x : answers)
+            cnt[x]++;
         
         for(auto &[a,b] : cnt){
             if(b%(a+1) == 0)
