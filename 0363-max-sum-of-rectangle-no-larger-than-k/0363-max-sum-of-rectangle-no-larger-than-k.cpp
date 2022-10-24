@@ -1,7 +1,7 @@
 class Solution {
 public:
-    int findMax(vector<int> &nums,int k){
-        int m = nums.size();
+    int findMax(int i,int j,vector<vector<int>>&matrix,int k){
+        int m = matrix[0].size();
         int ans = (int)-1e9;
         //find the maximum sum of subarray with sum atmost k
         int sum = 0;
@@ -9,7 +9,7 @@ public:
         set<int> container;
         container.insert(0);
         while(en < m){
-            sum += nums[en];
+            sum += matrix[j][en]-(i?matrix[i-1][en]:0);
             auto it = container.lower_bound(sum-k);
             if(it != container.end())
                 ans = max(ans,sum-*it);
@@ -19,17 +19,20 @@ public:
         return ans;
     }
     
-    
     int maxSumSubmatrix(vector<vector<int>>& matrix, int k) {
         int n = matrix.size();
         int m = matrix[0].size();
+        for(int i = 0 ; i < n ; i++){
+            for(int j = 0 ; j < m ; j++){
+                if(i)
+                    matrix[i][j] += matrix[i-1][j];
+            }
+        }
+        
         int ans = (int)-1e9;
-        for(int i = 0 ; i < m ; i++){
-            vector<int> RowSum(n,0);
-            for(int j = i ; j < m ; j++){
-                for(int k = 0 ; k < n ; k++)
-                    RowSum[k] += matrix[k][j];
-                ans = max(ans,findMax(RowSum,k));
+        for(int i = 0 ; i < n ; i++){
+            for(int j = i ; j < n ; j++){
+                ans = max(ans,findMax(i,j,matrix,k));
             }
         }
         return ans;
