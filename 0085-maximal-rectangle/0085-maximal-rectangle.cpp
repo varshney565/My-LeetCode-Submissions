@@ -1,6 +1,8 @@
 class Solution {
 public:
-    
+    /**
+    It's a n*n*n solution 
+    */
     int findMaxArea(vector<bool>&yes){
         //return the maximum number of true in the yes array,
         int ans = 0;
@@ -29,4 +31,20 @@ public:
         }
         return ans;
     }
+    /**
+    
+    we can do this problem using stack in n*n time. how??
+    largest rectanguler area in the hostogram technique.
+    will do it later when stack comes....
+    
+    
+    
+    but the logic will be as follows....
+    for(int i = 0 ; i < n ; i++){
+        if(i)
+            mat[i][j] += mat[i-1][j];
+        find the previous smaller and next smaller element for each element of mat[i] and find the             area and compare it with max
+    }
+    return max;
+    */
 };
