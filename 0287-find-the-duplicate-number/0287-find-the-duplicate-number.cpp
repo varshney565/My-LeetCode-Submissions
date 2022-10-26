@@ -10,8 +10,6 @@ public:
             }
             nums[abs(nums[i])] *= -1;
         }
-        for(int i = 0 ; i < n ; i++)
-            nums[i] = abs(nums[i]);
         return ans;
     }
 };
