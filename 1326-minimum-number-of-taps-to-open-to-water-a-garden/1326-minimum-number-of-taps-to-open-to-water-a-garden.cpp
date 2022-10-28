@@ -16,21 +16,16 @@ public:
         for(int i = 0 ; i < ranges.size() ; i++){
             interval.push_back({max(0,i-ranges[i]),min(n,i+ranges[i])});
         }
-        /**
-        club the gap of [0,n] by taking minimum number of intervals 
-        */
-        
         sort(interval.begin(),interval.end(),[&](vector<int>&a,vector<int>&b){
             if(a[0] != b[0])
                 return a[0] < b[0];
             return a[1]-a[0] > b[1]-b[0];
         });
-        
+        /**
+        club the gap of [0,n] by taking minimum number of intervals 
+        */        
         if(interval[0][0] != 0) return -1;
-        int curr = 0;
-        int next = -1;
-        int i = 1;
-        int cnt = 1;
+        int curr = 0,next = -1,i = 1,cnt = 1;
         while(i < interval.size()){
             if(interval[curr][1] < interval[i][0]){
                 if(next == -1) return -1;
