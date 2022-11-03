@@ -10,14 +10,10 @@ public:
         }
         st.push(nums[n-1]);
         for(int i = n - 2 ; i > 0 ; i--){
-            int s2 = nums[i];
-            int s3 = INT_MAX;
-            int s1 = pre[i-1];
-            while(!st.empty() && st.top() < s2){
-                s3 = st.top();
-                st.pop();
-            }
-            if(s1 < s2 && s2 > s3 && s1 < s3)
+            int s2 = nums[i],s1 = pre[i-1];
+            if(s1 >= s2) continue;
+            while(!st.empty() && st.top() <= s1) st.pop();
+            if(!st.empty() && s2 > st.top())
                 return true;
             st.push(nums[i]);
         }
