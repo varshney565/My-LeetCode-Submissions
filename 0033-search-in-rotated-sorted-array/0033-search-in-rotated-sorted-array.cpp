@@ -6,7 +6,7 @@ public:
         while(s <= e){
             int mid = (s+e)/2;
             if(target == nums[mid]) return mid;
-            if(nums[mid] < nums[e]){
+            if(nums[mid] <= nums[e]){
                 if(nums[mid] < target && target <= nums[e])s = mid+1;
                 else  e = mid-1;
             }else{
