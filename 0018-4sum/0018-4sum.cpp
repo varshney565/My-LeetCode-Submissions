@@ -16,7 +16,6 @@ public:
             }
             return ans;
         }
-        
         vector<vector<int>> ans;
         for(int i = ei ; i >= si ; ){
             vector<vector<int>> SmallAns = k_sum(nums,target-nums[i],si,i-1,k-1);
