@@ -18,23 +18,17 @@ public:
             if(val1 < val2){
                 ans.push_back(arr[s]);
                 s++;
-            }else if(val2 < val1){
+            }else if(val2 <= val1){
                 ans.push_back(arr[e]);
                 e--;
-            }else{
-                if(arr[s] < arr[e]){
-                    ans.push_back(arr[s]);
-                    s++;
-                }else{
-                    ans.push_back(arr[e]);
-                    e--;
-                }
             }
         }
+        
         while(s < n && ans.size() < k){
             ans.push_back(arr[s]);
             s++;
         }
+        
         while(e >= 0 && ans.size() < k){
             ans.push_back(arr[e]);
             e--;
