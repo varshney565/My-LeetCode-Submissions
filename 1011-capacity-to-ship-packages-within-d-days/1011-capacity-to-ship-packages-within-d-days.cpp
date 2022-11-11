@@ -2,7 +2,7 @@ class Solution {
 public:
     int shipWithinDays(vector<int>& weights, int Redays) {
         int sw = *max_element(weights.begin(),weights.end());
-        int ew = int(1e9);
+        int ew = int(1e7);
         while(sw <= ew){
             int midw = (sw+ew)/2;
             int days = 1;
