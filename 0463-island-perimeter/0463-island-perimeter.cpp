@@ -14,7 +14,7 @@ public:
                 if(newx >= 0 && newx < n && newy >= 0 && newy < m){
                     if(!visited[newx][newy]  && grid[newx][newy] == 1)
                         cnt += dfs(newx,newy);
-                    else if(!visited[newx][newy] && grid[newx][newy] == 0)
+                    else if(grid[newx][newy] == 0)
                         cnt++;                        
                 }else{
                     cnt++;
