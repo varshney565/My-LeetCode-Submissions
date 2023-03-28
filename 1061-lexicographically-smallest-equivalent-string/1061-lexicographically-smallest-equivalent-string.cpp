@@ -6,7 +6,7 @@ class Dsu{
         iota(p.begin(),p.end(),0);
     }
     
-    int get(char n){
+    int get(int n){
         if(p[n] == n) return n;
         return p[n] = get(p[n]);
     }
