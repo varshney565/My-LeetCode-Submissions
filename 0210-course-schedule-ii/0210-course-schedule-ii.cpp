@@ -3,38 +3,32 @@ public:
     vector<int> findOrder(int n, vector<vector<int>>& p) {
         vector<vector<int>> graph(n);
         for(int i = 0 ; i < p.size() ; i++){
-            graph[p[i][1]].push_back(p[i][0]);
+            graph[p[i][0]].push_back(p[i][1]);
         }
-        vector<int> indeg(n,0);
-        for(int i = 0 ; i < n ; i++){
-            for(int j = 0 ; j < graph[i].size() ; j++){
-                int child = graph[i][j];
-                indeg[child]++;
-            }
-        }
-        queue<int> PendingNodes;
-        for(int i = 0 ; i < n ; i++){
-            if(indeg[i] == 0){
-                PendingNodes.push(i);
-            }
-        }
+        vector<int> visited(n,0);
         vector<int> ans;
-        //bfs
-        int lvl = 0;
-        while(!PendingNodes.empty()){
-            int size = PendingNodes.size();
-            while(size--){
-                int front = PendingNodes.front();
-                PendingNodes.pop();
-                ans.push_back(front);
-                for(auto child : graph[front]){
-                    indeg[child]--;
-                    if(indeg[child] == 0) PendingNodes.push(child);
+        function<bool(int)> dfs = [&](int src){
+            visited[src] = 1;
+            for(auto child : graph[src]){
+                if(!visited[child]){
+                    bool res = dfs(child);
+                    if(!res)
+                        return false;
+                }else if(visited[child] == 1){
+                    return false;
                 }
             }
-            lvl++;
+            ans.push_back(src);
+            visited[src] = 2;
+            return true;
+        };
+        for(int i = 0 ; i < n ; i++){
+            if(!visited[i]){
+                bool res = dfs(i);
+                if(!res)
+                    return {};
+            }
         }
-        if(ans.size() == n) return ans;
-        return {};
+        return ans;
     }
 };
