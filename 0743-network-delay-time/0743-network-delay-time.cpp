@@ -34,6 +34,7 @@ public:
             for(auto nextNode : graph[currentNode]){
                 int v = nextNode.v;
                 int w = nextNode.w;
+                if(visited[v]) continue;
                 if(currentTime + w < Time[v]){
                     Time[v] = currentTime+w;
                     PendingNodes.insert({Time[v],v});
