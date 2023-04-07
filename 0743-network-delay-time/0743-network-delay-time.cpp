@@ -21,20 +21,17 @@ public:
         Time[k-1] = 0;
         set<pair<int,int>> PendingNodes;
         PendingNodes.insert({0,k-1});
-        vector<bool> visited(n,false);
         while(!PendingNodes.empty()){
             auto front = *PendingNodes.begin();
             PendingNodes.erase(front);
             int currentNode = front.second;
             int currentTime = front.first;
-            if(visited[currentNode]){
+            if(Time[currentNode] < currentTime){
                 continue;
             }
-            visited[currentNode] = true;
             for(auto nextNode : graph[currentNode]){
                 int v = nextNode.v;
                 int w = nextNode.w;
-                if(visited[v]) continue;
                 if(currentTime + w < Time[v]){
                     Time[v] = currentTime+w;
                     PendingNodes.insert({Time[v],v});
