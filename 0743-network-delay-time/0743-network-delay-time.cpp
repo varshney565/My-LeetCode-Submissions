@@ -33,6 +33,7 @@ public:
                 int v = nextNode.v;
                 int w = nextNode.w;
                 if(currentTime + w < Time[v]){
+                    PendingNodes.erase({Time[v],v});
                     Time[v] = currentTime+w;
                     PendingNodes.insert({Time[v],v});
                 }
