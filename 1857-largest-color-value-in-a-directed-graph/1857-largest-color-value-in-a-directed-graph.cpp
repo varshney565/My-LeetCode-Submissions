@@ -1,6 +1,7 @@
 class Solution {
 public:
     int largestPathValue(string colors, vector<vector<int>>& edges) {
+        //MAKING the graph
         int n = colors.size();
         vector<vector<int>> graph(n);
         vector<int> indeg(n,0);
@@ -13,6 +14,7 @@ public:
         int ans = -1;
         vector<vector<int>> dp(n,vector<int>(26,0));
         int nodes = 0;
+        //dfs call
         function<int(int)> dfs = [&](int src){
             visited[src] = 1;
             nodes++;
@@ -34,7 +36,7 @@ public:
             visited[src] = 2;
             return ans;
         };
-        
+        //make dfs call for all the nodes that have there indeg set as 0
         for(int i = 0 ; i < n ; i++){
             if(indeg[i] == 0){
                 int res = dfs(i);
@@ -42,6 +44,7 @@ public:
             }
         }
 
+        //in case any node is left for visiting return -1
         return nodes == n ? ans : -1;
     }
 };
