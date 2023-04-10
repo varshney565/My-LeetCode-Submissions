@@ -10,41 +10,38 @@ public:
         }
         
         vector<int> visited(n,0);
+        int ans = -1;
         vector<vector<int>> dp(n,vector<int>(26,0));
-        function<bool(int)> dfs = [&](int src){
+        int nodes = 0;
+        function<int(int)> dfs = [&](int src){
             visited[src] = 1;
+            nodes++;
             for(auto child : graph[src]){
                 if(visited[child] == 0){
-                    bool ans = dfs(child);
-                    if(!ans) return ans;
+                    int a = dfs(child);
+                    if(a == -1) return a;
                 }else if(visited[child] == 1){
-                    return false;
+                    return -1;
                 }
                 for(int j = 0 ; j < 26 ; j++){
                     dp[src][j] = max(dp[src][j],dp[child][j]);
                 }
             }
             dp[src][colors[src]-'a']++;
+            for(int j = 0 ; j < 26 ; j++){
+                ans = max(ans,dp[src][j]);
+            }
             visited[src] = 2;
-            return true;
+            return ans;
         };
         
         for(int i = 0 ; i < n ; i++){
             if(indeg[i] == 0){
-                bool res = dfs(i);
-                if(!res) return -1;
+                int res = dfs(i);
+                if(res == -1) return -1;
             }
         }
 
-        int ans = 0;
-        for(int i = 0 ; i < n ; i++){
-            if(!visited[i]) return -1;
-            if(indeg[i] == 0){
-                for(int j = 0 ; j < 26 ; j++){
-                    ans = max(ans,dp[i][j]);
-                }
-            }
-        }
-        return ans;
+        return nodes == n ? ans : -1;
     }
 };
