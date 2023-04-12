@@ -26,10 +26,11 @@ public:
                     for(char j = 'a' ; j <= 'z' ; j++){
                         yes[i] = j;
                         if(GivenWords.find(yes) != GivenWords.end()){
-                            if(todo.find(yes) == todo.end())
+                            if(todo.find(yes) == todo.end()){
                                 PendingNodes.push(yes);
+                                todo.insert(yes);
+                            }
                             parent[yes].push_back(t);
-                            todo.insert(yes);
                         }
                     }
                 }
