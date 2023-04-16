@@ -20,10 +20,7 @@ public:
             //option1 :: take that char count.
             int ans = 0;
             int val = cnt[m][target[n]-'a'];
-            if(val) {
-                long long t = go(n-1,m-1);
-                ans = (ans + (val*t)%mod)%mod;
-            }
+            if(val) ans = (ans + ((long long)val*go(n-1,m-1))%mod)%mod;
             //option2 :: don't take that char count.
             ans = (ans + go(n,m-1))%mod;
             return dp[n][m] = ans;
