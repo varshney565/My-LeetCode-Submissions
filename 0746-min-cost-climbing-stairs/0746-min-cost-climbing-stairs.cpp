@@ -3,11 +3,13 @@ public:
     int minCostClimbingStairs(vector<int>& cost) {
         int n = cost.size();
         vector<int> dp(cost.size()+1,-1);
-        function<int(int)> go = [&](int n){
-            if(n <= 1) return dp[n] = cost[n];
-            if(dp[n] != -1) return dp[n];
-            return dp[n] = (n < cost.size() ? cost[n] : 0) + min(go(n-1),go(n-2));
-        };
-        return go(n);
+        for(int n = 0 ; n <= cost.size() ; n++){
+            if(n <= 1) {
+                dp[n] = cost[n];
+                continue;
+            }
+            dp[n] = (n < cost.size() ? cost[n] : 0) + min(dp[n-1],dp[n-2]);
+        }
+        return dp[cost.size()];
     }
 };
