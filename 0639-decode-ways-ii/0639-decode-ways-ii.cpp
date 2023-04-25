@@ -25,7 +25,8 @@ public:
                         if(!(num >= 1 && num <= 26))
                             f = 0;
                     }
-                    ans = (ans + (go(i-2)*f)%mod)%mod;
+                    if(f)
+                        ans = (ans + (go(i-2)*f)%mod)%mod;
                 }
             }
             return dp[i] = ans;
