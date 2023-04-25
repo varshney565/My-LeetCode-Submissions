@@ -10,7 +10,6 @@ public:
             //consider only ith character
             int ans = 0;
             if(s[i] != '0') ans = ((long long)go(i-1)*(s[i] == '*' ? 9ll : 1ll))%mod;
-            
             //consider both ith and (i-1)th character
             if(i){
                 if(s[i-1] != '0'){
