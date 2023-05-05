@@ -1,20 +1,29 @@
 class Solution {
 public:
     int numDistinct(string s, string t) {
-        int n = s.size();
-        int m = t.size();
-        vector<vector<int>> dp(n+1,vector<int>(m+1,-1));
-        function<int(int,int)> go = [&](int n,int m){
-            if(m == 0) return dp[n][m] = 1;
-            if(n == 0) return dp[n][m] = 0;
-            if(dp[n][m] != -1) return dp[n][m];
-            int ans = 0;
-            if(s[n-1] == t[m-1]){
-                ans = go(n-1,m-1);
+        int N = s.size();
+        int M = t.size();
+        vector<vector<double>> dp(N+1,vector<double>(M+1,0));
+        for(int n = 0 ; n <= N ; n++){
+            for(int m = 0 ; m <= M ; m++){
+                if(m == 0) {
+                    dp[n][m] = 1;
+                    continue;
+                }
+                if(n == 0) {
+                    dp[n][m] = 0;
+                    continue;
+                }
+                if(n < m){
+                    dp[n][m] = 0;
+                    continue;
+                }
+                if(s[n-1] == t[m-1]){
+                    dp[n][m] = dp[n-1][m-1];
+                }
+                dp[n][m] += dp[n-1][m];
             }
-            ans += go(n-1,m);
-            return dp[n][m] = ans;
-        };
-        return go(n,m);
+        }
+        return dp[N][M];
     }
 };
