@@ -13,9 +13,9 @@ public:
             if(s[n-1] == t[m-1]){
                 ans = go(n-1,m-1);
             }else{
-                int ch1 = 1+go(n-1,m-1);
-                int ch2 = 1+go(n-1,m);
-                int ch3 = 1+go(n,m-1);
+                int ch1 = 1+go(n-1,m-1); //replace
+                int ch2 = 1+go(n-1,m);   //delete
+                int ch3 = 1+go(n,m-1);   //insert
                 ans = min({ans,ch1,ch2,ch3});
             }
             return dp[n][m] = ans;
