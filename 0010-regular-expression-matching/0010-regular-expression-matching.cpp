@@ -9,7 +9,6 @@ public:
                 return dp[n][m] = 1;
             }
             if(n == 0){
-                if(n%2) return dp[n][m] = 0;
                 for(int i = m - 1 ; i >= 0 ; i-=2){
                     if(p[i] != '*') return dp[n][m] = 0;
                 }
