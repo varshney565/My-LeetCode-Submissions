@@ -3,7 +3,7 @@ public:
     int numDecodings(string s) {
         int n = s.size();
         const int mod = 1e9+7;
-        long long a = 1,b = 1;
+        long long a = 0,b = 1;
         for(int i = 0 ; i < n ; i++){
             int c = 0;
             if(s[i] != '0') c = (b*(s[i] == '*' ? 9 : 1))%mod;
