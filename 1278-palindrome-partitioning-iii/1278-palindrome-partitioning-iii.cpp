@@ -16,6 +16,7 @@ public:
                 j++;
             }
         }
+        
         vector<vector<int>> dp(n+1,vector<int>(k+1,-1));
         function<int(int,int)> go = [&](int n,int k){
             if(k == 1){
