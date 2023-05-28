@@ -13,7 +13,7 @@ public:
             for(int i = n - 1 ; i >= 0 ; i--){
                 word = s[i] + word;
                 if(Dict.find(word) != Dict.end()){
-                    ans = ans || go(i);
+                    ans = go(i) || ans;
                 }
             }
             return dp[n] = (ans?1:0);
