@@ -9,7 +9,7 @@ class Solution {
     	vector<long long> dp(T+1,0);
     	dp[0] = 1;
     	for(int n = 1 ; n <= N ; n++){
-    		for(int target = n ; target <= T ; target++){
+    		for(int target = v[n-1] ; target <= T ; target++){
     			if(target-v[n-1] >= 0)
     				dp[target] += dp[target-v[n-1]];
     		}
