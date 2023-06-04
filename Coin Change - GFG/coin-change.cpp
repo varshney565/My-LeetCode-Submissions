@@ -6,22 +6,24 @@ using namespace std;
 class Solution {
   public:
     long long int count(int v[], int N, int T) {
-        vector<vector<long long>> dp(N+1,vector<long long>(T+1,0));
+        vector<long long> dp(T+1,0);
     	for(int n = 1 ; n <= N ; n++){
+    		vector<long long> dp2(T+1,0);
     		for(int target = 0 ; target <= T ; target++){
     			if(target == 0) {
-    				dp[n][target] = 1;
+    				dp2[target] = 1;
     				continue;
     			}
     			long long count = 0;
     			if(target-v[n-1] >= 0)
-    				count += dp[n][target-v[n-1]];
+    				count += dp2[target-v[n-1]];
     			if(n > 1)
-    				count += dp[n-1][target];
-    			dp[n][target] = count;
+    				count += dp[target];
+    			dp2[target] = count;
     		}
+    		swap(dp2,dp);
     	}
-    	return dp[N][T];
+    	return dp[T];
     }
 };
 
