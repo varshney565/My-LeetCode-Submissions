@@ -10,8 +10,7 @@ class Solution {
     	dp[0] = 1;
     	for(int n = 1 ; n <= N ; n++){
     		for(int target = v[n-1] ; target <= T ; target++){
-    			if(target-v[n-1] >= 0)
-    				dp[target] += dp[target-v[n-1]];
+    			dp[target] += dp[target-v[n-1]];
     		}
     	}
     	return dp[T];
