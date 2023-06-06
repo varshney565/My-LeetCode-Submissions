@@ -16,7 +16,7 @@ public:
             if(n == 0 || weight == 0) return dp[n][weight] = 0;
             if(dp[n][weight] != -1) return dp[n][weight];
             int value = 0;
-            //take 
+            //take
             if(weight-wt[n-1] >= 0)
                 value = val[n-1] + go(n,weight-wt[n-1]);
             //ignore
