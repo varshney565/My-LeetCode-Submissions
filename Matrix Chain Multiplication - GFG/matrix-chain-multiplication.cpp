@@ -11,18 +11,22 @@ class Solution{
 public:
     int matrixMultiplication(int n, int arr[]){
         vector<vector<int>> dp(n,vector<int>(n,-1));
-        function<int(int,int)> go = [&](int st,int en){
-            if(en - st == 1) return dp[st][en] = 0;
-            if(dp[st][en] != -1) return dp[st][en];
-            int ans = 1e9;
-            for(int cut = st + 1 ; cut < en ; cut++){
-                int leftAns = go(st,cut);
-                int rightAns = go(cut,en);
-                ans = min(ans,leftAns+rightAns+arr[st]*arr[cut]*arr[en]);
+        for(int st = n-1 ; st >= 0 ; st--){
+            for(int en = 0 ; en < n ; en++){
+                if(en - st == 1) {
+                    dp[st][en] = 0;
+                    continue;
+                }
+                int ans = 1e9;
+                for(int cut = st + 1 ; cut < en ; cut++){
+                    int leftAns = dp[st][cut];
+                    int rightAns = dp[cut][en];
+                    ans = min(ans,leftAns+rightAns+arr[st]*arr[cut]*arr[en]);
+                }
+                dp[st][en] = ans;
             }
-            return dp[st][en] = ans;
-        };
-        return go(0,n-1);
+        }
+        return dp[0][n-1];
     }
 };
 
