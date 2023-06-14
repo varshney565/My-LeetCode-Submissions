@@ -2,19 +2,15 @@ class Solution {
 public:
     int maxCoins(vector<int>& nums) {
         int n = nums.size();
-        vector<vector<int>> dp(n,vector<int>(n,-1));
-        function<int(int,int)> go = [&](int st,int en){
-            if(st > en) return 0;
-            if(dp[st][en] != -1) return dp[st][en];
-            int lf = 1,rf = 1;
-            if(st-1 >= 0) lf = nums[st-1];
-            if(en+1 < n) rf = nums[en+1];
-            int ans = 0;
-            for(int last = st ; last <= en ; last++){
-               ans = max(ans,nums[last]*lf*rf+go(st,last-1)+go(last+1,en));
+        vector<vector<int>> dp(n,vector<int>(n,0));
+        for(int gap = 1 ; gap <= n ; gap++){
+            for(int i = 0,j = gap-1 ; j < n ; i++,j++){
+                int lf = (i-1 >= 0 ? nums[i-1] : 1),rf = (j+1 < n ? nums[j+1] : 1);
+                for(int k = i ; k <= j ; k++){
+                    dp[i][j] = max(dp[i][j],(i <= k-1 ? dp[i][k-1] : 0)+(k+1 <= j ? dp[k+1][j] : 0)+lf*nums[k]*rf);
+                }
             }
-            return dp[st][en] = ans;
-        };
-        return go(0,n-1);
+        }
+        return dp[0][n-1];
     }
 };
